@@ -1,22 +1,30 @@
-name: First Linux CI
+name: Tharanidharan M – Linux CI Pipeline
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:   # manual run option
 
 jobs:
-  run:
+  run-python-app:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Setup Python environment
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      - name: Execute code
+      - name: Display system info
+        run: |
+          echo "Running on GitHub Actions Runner"
+          uname -a
+          python --version
+
+      - name: Execute Python application
         run: python app.py
+

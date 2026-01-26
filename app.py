@@ -1,64 +1,65 @@
-import platform
-import shutil
-import time
-from datetime import datetime
+def add(a, b):
+    return a + b
 
-def print_header(title):
-    print("\n" + "=" * 50)
-    print(title)
-    print("=" * 50)
+def subtract(a, b):
+    return a - b
 
-def system_info():
-    print_header("SYSTEM INFORMATION")
-    print(f"OS            : {platform.system()}")
-    print(f"OS Version    : {platform.release()}")
-    print(f"Architecture  : {platform.machine()}")
+def multiply(a, b):
+    return a * b
 
-def disk_check():
-    print_header("DISK USAGE CHECK")
-    total, used, free = shutil.disk_usage("/")
-    total_gb = total // (2**30)
-    used_gb = used // (2**30)
-    free_gb = free // (2**30)
+def divide(a, b):
+    if b == 0:
+        return "Error: Division by zero"
+    return a / b
 
-    print(f"Total Disk    : {total_gb} GB")
-    print(f"Used Disk     : {used_gb} GB")
-    print(f"Free Disk     : {free_gb} GB")
+def power(a, b):
+    return a ** b
 
-    if free_gb < 5:
-        print("STATUS        : WARNING - Low disk space")
-    else:
-        print("STATUS        : OK")
+def modulus(a, b):
+    return a % b
 
-def service_check():
-    print_header("APPLICATION SERVICE CHECK")
-    services = ["Web Server", "Database", "Cache"]
 
-    for service in services:
-        print(f"{service:<15}: RUNNING")
-        time.sleep(0.5)
+def calculator():
+    print("=== Intermediate Python Calculator ===")
+    print("Operations:")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+    print("5. Power")
+    print("6. Modulus")
+    print("0. Exit")
 
-def compliance_check():
-    print_header("SECURITY & COMPLIANCE CHECK")
-    print("Root Login        : Disabled")
-    print("Firewall Status  : Enabled")
-    print("SSH Access        : Restricted")
-    print("Compliance Status: PASSED")
+    while True:
+        try:
+            choice = int(input("\nEnter operation number: "))
 
-def summary():
-    print_header("CHECK SUMMARY")
-    print("Overall Status : HEALTHY")
-    print("Checked At     :", datetime.now())
+            if choice == 0:
+                print("Calculator exited.")
+                break
 
-def main():
-    print_header("CLOUD SERVER HEALTH CHECK STARTED")
-    system_info()
-    disk_check()
-    service_check()
-    compliance_check()
-    summary()
-    print_header("HEALTH CHECK COMPLETED SUCCESSFULLY")
+            if choice not in range(1, 7):
+                print("Invalid choice. Try again.")
+                continue
 
-if __name__ == "__main__":
-    main()
+            num1 = float(input("Enter first number: "))
+            num2 = float(input("Enter second number: "))
 
+            if choice == 1:
+                print("Result:", add(num1, num2))
+            elif choice == 2:
+                print("Result:", subtract(num1, num2))
+            elif choice == 3:
+                print("Result:", multiply(num1, num2))
+            elif choice == 4:
+                print("Result:", divide(num1, num2))
+            elif choice == 5:
+                print("Result:", power(num1, num2))
+            elif choice == 6:
+                print("Result:", modulus(num1, num2))
+
+        except ValueError:
+            print("Invalid input. Please enter numbers only.")
+
+
+calculator()

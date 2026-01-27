@@ -1,0 +1,24 @@
+name: HTML CSS Automation CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  html-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML & CSS files
+        run: |
+          echo "Checking HTML file..."
+          test -f website/index.html
+
+          echo "Checking CSS file..."
+          test -f website/style.css
+
+          echo "HTML & CSS files are present. Validation successful."
